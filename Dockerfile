@@ -6,7 +6,7 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
        python-software-properties \
        software-properties-common \
-       rsyslog systemd systemd-cron sudo \
+       rsyslog sudo wget \
     && rm -Rf /var/lib/apt/lists/* \
     && rm -Rf /usr/share/doc && rm -Rf /usr/share/man \
     && apt-get clean
@@ -21,9 +21,6 @@ RUN add-apt-repository -y ppa:ansible/ansible \
   && rm -rf /var/lib/apt/lists/* \
   && rm -Rf /usr/share/doc && rm -Rf /usr/share/man \
   && apt-get clean
-
-# Install wget
-RUN apt-get update -y && apt-get install wget -y
 
 # Uninstall old vagrant version.
 RUN apt-get remove -y vagrant
