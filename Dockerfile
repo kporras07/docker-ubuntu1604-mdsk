@@ -38,7 +38,7 @@ RUN echo "deb http://download.virtualbox.org/virtualbox/debian xenial contrib" >
 RUN wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | apt-key add -
 RUN wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | apt-key add -
 RUN apt-get update -y
-RUN apt-get install virtualbox-5.1 dkms -y
+RUN apt-get install virtualbox virtualbox-dkms -y
 
 # Install PHP
 RUN apt-get install php5-cli php5-readline -y
