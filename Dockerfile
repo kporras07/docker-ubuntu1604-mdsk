@@ -22,6 +22,9 @@ RUN add-apt-repository -y ppa:ansible/ansible \
   && rm -Rf /usr/share/doc && rm -Rf /usr/share/man \
   && apt-get clean
 
+# Install wget
+RUN apt-get install wget
+
 # Install Vagrant
 RUN wget https://releases.hashicorp.com/vagrant/1.9.1/vagrant_1.9.1_x86_64.deb -q
 RUN dpkg -i vagrant_1.9.1_x86_64.deb
@@ -46,6 +49,10 @@ RUN php -r "if (hash_file('SHA384', 'composer-setup.php') === 'aa96f26c2b67226a3
 RUN php composer-setup.php
 RUN php -r "unlink('composer-setup.php');"
 RUN mv composer.phar /usr/local/bin/composer
+
+# Install global drush.
+RUN composer global require drush/drush:7.*
+RUN ln -s ~/.composer/vendor/bin/drush /usr/bin/drush
 
 COPY initctl_faker .
 RUN chmod +x initctl_faker && rm -fr /sbin/initctl && ln -s /initctl_faker /sbin/initctl
