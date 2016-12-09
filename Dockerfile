@@ -1,4 +1,4 @@
-FROM jencryzthers:vboxinsidedocker
+FROM jencryzthers/vboxinsidedocker:latest
 MAINTAINER Kevin Porras
 
 # Install dependencies.
