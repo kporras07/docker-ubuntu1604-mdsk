@@ -23,7 +23,7 @@ RUN add-apt-repository -y ppa:ansible/ansible \
   && apt-get clean
 
 # Install wget
-RUN apt-get install wget
+RUN apt-get update -y && apt-get install wget -y
 
 # Install Vagrant
 RUN wget https://releases.hashicorp.com/vagrant/1.9.1/vagrant_1.9.1_x86_64.deb -q
