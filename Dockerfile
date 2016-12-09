@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM jencryzthers:vboxinsidedocker
 MAINTAINER Kevin Porras
 
 # Install dependencies.
@@ -25,6 +25,9 @@ RUN add-apt-repository -y ppa:ansible/ansible \
 # Install wget
 RUN apt-get update -y && apt-get install wget -y
 
+# Uninstall old vagrant version.
+RUN apt-get remove -y vagrant
+
 # Install Vagrant
 RUN wget https://releases.hashicorp.com/vagrant/1.9.1/vagrant_1.9.1_x86_64.deb -q
 RUN dpkg -i vagrant_1.9.1_x86_64.deb
@@ -32,13 +35,6 @@ RUN dpkg -i vagrant_1.9.1_x86_64.deb
 # Install Vagrant Plugins
 RUN vagrant plugin install vagrant-hostsupdater
 RUN vagrant plugin install vagrant-auto_network
-
-# Install Virtualbox
-RUN echo "deb http://download.virtualbox.org/virtualbox/debian xenial contrib" > /etc/apt/sources.list
-RUN wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | apt-key add -
-RUN wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | apt-key add -
-RUN apt-get update -y
-RUN apt-get install virtualbox virtualbox-dkms -y
 
 # Install PHP
 RUN apt-get install php5-cli php5-readline -y
